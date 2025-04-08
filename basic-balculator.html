@@ -4,7 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A sleek dark-themed calculator with full functionality. Perfect for quick calculations with easy-on-the-eyes dark mode.">
-    <title>Dark Mode Calculator with Ads</title>
+    <meta name="keywords" content="calculator, dark calculator, online calculator, math tool, web calculator">
+    <meta name="author" content="Your Name">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/dark-calculator/">
+    <meta property="og:title" content="Dark Mode Web Calculator">
+    <meta property="og:description" content="A sleek dark-themed calculator with full functionality.">
+    <meta property="og:image" content="https://yourwebsite.com/images/dark-calculator-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourwebsite.com/dark-calculator/">
+    <meta property="twitter:title" content="Dark Mode Web Calculator">
+    <meta property="twitter:description" content="A sleek dark-themed calculator with full functionality.">
+    <meta property="twitter:image" content="https://yourwebsite.com/images/dark-calculator-preview.jpg">
+    
+    <title>Dark Mode Calculator | Free Online Calculation Tool</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourwebsite.com/dark-calculator/" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
@@ -20,18 +48,44 @@
             --equal-color: #FF9500;
             --ad-bg: #1A1A1A;
             --ad-border: #333333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --border-radius: 12px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: var(--bg-color);
+            color: white;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            color: white;
+        }
+        
+        header {
+            text-align: center;
+            padding: 1.5rem;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .ad-container {
@@ -42,22 +96,15 @@
             padding: 15px;
             margin: 15px 0;
             text-align: center;
-            border-radius: 8px;
-        }
-        
-        .calculator-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 400px;
+            border-radius: var(--border-radius);
         }
         
         .calculator {
             width: 100%;
-            border-radius: 20px;
+            max-width: 320px;
+            border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--shadow);
             margin: 20px 0;
         }
         
@@ -65,7 +112,7 @@
             background-color: var(--display-bg);
             padding: 20px;
             text-align: right;
-            height: 80px;
+            height: 100px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -81,6 +128,7 @@
         .current-operand {
             font-size: 2.5rem;
             font-weight: bold;
+            word-wrap: break-word;
         }
         
         .keys {
@@ -93,7 +141,7 @@
         button {
             border: none;
             padding: 20px;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
             background-color: var(--key-color);
             color: var(--key-text);
@@ -130,67 +178,43 @@
         
         footer {
             margin-top: 30px;
+            padding: 1.5rem;
+            text-align: center;
             color: #777;
             font-size: 0.9rem;
-            text-align: center;
+            width: 100%;
         }
         
         @media (min-width: 768px) {
-            .ad-container {
-                width: 728px;
-                height: 90px;
-            }
-            
-            .calculator-container {
-                flex-direction: row;
-                justify-content: space-around;
-                align-items: flex-start;
-                max-width: 1200px;
-            }
-            
-            .side-ads {
-                display: flex;
-                flex-direction: column;
-                width: 300px;
-                margin: 0 20px;
-            }
-            
             .calculator {
-                margin: 0 20px;
+                max-width: 400px;
+            }
+            
+            .ad-container {
+                height: 90px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Top Ad Banner -->
-    <div class="ad-container">
-        <!-- Replace with your AdSense ad unit -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-             data-ad-slot="YOUR_TOP_AD_SLOT"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
+    <header>
+        <h1>Dark Mode Calculator</h1>
+        <p>Perform calculations with ease</p>
+    </header>
     
-    <div class="calculator-container">
-        <!-- Left Side Ad (Desktop only) -->
-        <div class="side-ads">
-            <div class="ad-container">
-                <!-- Replace with your AdSense ad unit -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-                     data-ad-slot="YOUR_SIDE_AD_SLOT"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+    <div class="container">
+        <!-- Top Ad Banner -->
+        <div class="ad-container">
+            <!-- Replace with your AdSense ad unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_TOP_AD_SLOT"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
         
         <!-- Calculator -->
@@ -226,41 +250,26 @@
             </div>
         </div>
         
-        <!-- Right Side Ad (Desktop only) -->
-        <div class="side-ads">
-            <div class="ad-container">
-                <!-- Replace with your AdSense ad unit -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-                     data-ad-slot="YOUR_SIDE_AD_SLOT_2"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+        <!-- Bottom Ad Banner -->
+        <div class="ad-container">
+            <!-- Replace with your AdSense ad unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_BOTTOM_AD_SLOT"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
-    </div>
-    
-    <!-- Bottom Ad Banner -->
-    <div class="ad-container">
-        <!-- Replace with your AdSense ad unit -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-             data-ad-slot="YOUR_BOTTOM_AD_SLOT"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
     
     <footer>
         &copy; <span id="year"></span> Dark Mode Calculator. All rights reserved.
     </footer>
-
+    
+    <!-- Calculator Script -->
     <script>
         let currentInput = '0';
         let previousInput = '';
@@ -365,6 +374,24 @@
         
         // Initialize display
         updateDisplay();
+    </script>
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Dark Mode Calculator",
+      "url": "https://yourwebsite.com/dark-calculator/",
+      "description": "A sleek dark-themed calculator with full functionality.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
     </script>
 </body>
 </html>
