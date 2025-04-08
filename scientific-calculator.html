@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced scientific calculator with dark theme. Perfect for students, engineers, and scientists. Features trigonometry, logarithms, exponents, and more.">
+    <meta name="keywords" content="scientific calculator, online calculator, math tool, engineering calculator, trigonometry calculator">
+    <meta name="author" content="Calculator Pro">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Scientific Calculator | Advanced Math Tool">
+    <meta property="og:description" content="Professional scientific calculator with dark theme and advanced functions">
+    <meta property="og:image" content="https://example.com/calculator-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scientific Calculator | Advanced Math Tool">
+    <meta name="twitter:description" content="Professional scientific calculator with dark theme and advanced functions">
+    
+    <title>Scientific Calculator | Advanced Math Tool</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+    
+    <style>
+        :root {
+            --bg-color: #121212;
+            --key-color: #ffffff;
+            --key-text: #000000;
+            --display-bg: #f0f0f0;
+            --operator-color: #ff9500;
+            --function-color: #34c759;
+            --clear-color: #ff3b30;
+            --equal-color: #007aff;
+            --ad-bg: #1e1e1e;
+            --text-color: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .ad-container {
+            background-color: var(--ad-bg);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 728px;
+            text-align: center;
+        }
+        
+        .calculator-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .calculator {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .display {
+            background-color: var(--display-bg);
+            padding: 20px;
+            text-align: right;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #333;
+        }
+        
+        .previous-operand {
+            font-size: 1.2rem;
+            color: #666;
+            min-height: 1.2rem;
+            word-break: break-all;
+        }
+        
+        .current-operand {
+            font-size: 2rem;
+            font-weight: bold;
+            word-break: break-all;
+        }
+        
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background-color: #333;
+        }
+        
+        button {
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background-color: var(--key-color);
+            color: var(--key-text);
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        .operator {
+            background-color: var(--operator-color);
+            color: white;
+        }
+        
+        .function {
+            background-color: var(--function-color);
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .clear {
+            background-color: var(--clear-color);
+            color: white;
+        }
+        
+        .equal {
+            background-color: var(--equal-color);
+            color: white;
+        }
+        
+        .span-2 {
+            grid-column: span 2;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        
+        @media (max-width: 600px) {
+            .keys {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            
+            button {
+                padding: 12px;
+                font-size: 1rem;
+            }
+            
+            .function {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Scientific Calculator</h1>
+        <p>Advanced math functions at your fingertips</p>
+    </header>
+    
+    <div class="ad-container">
+        <!-- AdSense Top Banner -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+             data-ad-slot="YOUR_TOP_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <div class="calculator-container">
+        <div class="calculator">
+            <div class="display">
+                <div class="previous-operand" id="previous-operand"></div>
+                <div class="current-operand" id="current-operand">0</div>
+            </div>
+            <div class="keys">
+                <button class="clear" onclick="clearAll()">AC</button>
+                <button onclick="deleteLastChar()">DEL</button>
+                <button class="function" onclick="appendOperator('%')">%</button>
+                <button class="function" onclick="calculateSquareRoot()">√</button>
+                <button class="operator" onclick="appendOperator('/')">/</button>
+                
+                <button class="function" onclick="calculatePower(2)">x²</button>
+                <button class="function" onclick="calculatePower(3)">x³</button>
+                <button class="function" onclick="calculatePower('y')">x^y</button>
+                <button class="function" onclick="calculateFactorial()">x!</button>
+                <button class="operator" onclick="appendOperator('*')">×</button>
+                
+                <button class="function" onclick="calculateSin()">sin</button>
+                <button class="function" onclick="calculateCos()">cos</button>
+                <button class="function" onclick="calculateTan()">tan</button>
+                <button class="function" onclick="calculateLog()">log</button>
+                <button class="operator" onclick="appendOperator('-')">-</button>
+                
+                <button class="function" onclick="calculateAsin()">sin⁻¹</button>
+                <button class="function" onclick="calculateAcos()">cos⁻¹</button>
+                <button class="function" onclick="calculateAtan()">tan⁻¹</button>
+                <button class="function" onclick="calculateLn()">ln</button>
+                <button class="operator" onclick="appendOperator('+')">+</button>
+                
+                <button class="function" onclick="calculatePi()">π</button>
+                <button class="function" onclick="calculateE()">e</button>
+                <button onclick="appendNumber('.')">.</button>
+                <button class="function" onclick="toggleSign()">+/-</button>
+                <button class="equal" onclick="calculate()">=</button>
+                
+                <button class="span-2" onclick="appendNumber('7')">7</button>
+                <button onclick="appendNumber('8')">8</button>
+                <button onclick="appendNumber('9')">9</button>
+                
+                <button class="span-2" onclick="appendNumber('4')">4</button>
+                <button onclick="appendNumber('5')">5</button>
+                <button onclick="appendNumber('6')">6</button>
+                
+                <button class="span-2" onclick="appendNumber('1')">1</button>
+                <button onclick="appendNumber('2')">2</button>
+                <button onclick="appendNumber('3')">3</button>
+                
+                <button class="span-2" onclick="appendNumber('0')">0</button>
+                <button class="function" onclick="openParenthesis()">(</button>
+                <button class="function" onclick="closeParenthesis()">)</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="ad-container">
+        <!-- AdSense Bottom Banner -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+             data-ad-slot="YOUR_BOTTOM_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <footer>
+        &copy; <span id="year"></span> Scientific Calculator Pro. All rights reserved.
+    </footer>
+    
+    <script>
+        let currentInput = '0';
+        let previousInput = '';
+        let operation = null;
+        let resetInput = false;
+        let memory = 0;
+        
+        const currentDisplay = document.getElementById('current-operand');
+        const previousDisplay = document.getElementById('previous-operand');
+        
+        function updateDisplay() {
+            currentDisplay.textContent = currentInput;
+            previousDisplay.textContent = previousInput + (operation ? ' ' + operation : '');
+        }
+        
+        function appendNumber(number) {
+            if (currentInput === '0' || resetInput) {
+                currentInput = number;
+                resetInput = false;
+            } else {
+                currentInput += number;
+            }
+            updateDisplay();
+        }
+        
+        function appendOperator(op) {
+            if (operation !== null) calculate();
+            previousInput = currentInput;
+            operation = op;
+            resetInput = true;
+            updateDisplay();
+        }
+        
+        function calculate() {
+            let computation;
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+            
+            if (isNaN(prev) return;
+            
+            switch (operation) {
+                case '+':
+                    computation = prev + current;
+                    break;
+                case '-':
+                    computation = prev - current;
+                    break;
+                case '*':
+                    computation = prev * current;
+                    break;
+                case '/':
+                    computation = prev / current;
+                    break;
+                case '%':
+                    computation = prev % current;
+                    break;
+                case '^':
+                    computation = Math.pow(prev, current);
+                    break;
+                default:
+                    return;
+            }
+            
+            currentInput = computation.toString();
+            operation = null;
+            previousInput = '';
+            resetInput = true;
+            updateDisplay();
+        }
+        
+        function clearAll() {
+            currentInput = '0';
+            previousInput = '';
+            operation = null;
+            updateDisplay();
+        }
+        
+        function deleteLastChar() {
+            if (currentInput.length === 1 || (currentInput.length === 2 && currentInput.startsWith('-'))) {
+                currentInput = '0';
+            } else {
+                currentInput = currentInput.slice(0, -1);
+            }
+            updateDisplay();
+        }
+        
+        function toggleSign() {
+            currentInput = currentInput.startsWith('-') ? currentInput.substring(1) : '-' + currentInput;
+            updateDisplay();
+        }
+        
+        // Scientific functions
+        function calculateSquareRoot() {
+            currentInput = Math.sqrt(parseFloat(currentInput)).toString();
+            updateDisplay();
+        }
+        
+        function calculatePower(power) {
+            if (power === 'y') {
+                previousInput = currentInput;
+                operation = '^';
+                resetInput = true;
+            } else {
+                currentInput = Math.pow(parseFloat(currentInput), power).toString();
+            }
+            updateDisplay();
+        }
+        
+        function calculateFactorial() {
+            let num = parseInt(currentInput);
+            if (num < 0) {
+                currentInput = 'Error';
+            } else {
+                let result = 1;
+                for (let i = 2; i <= num; i++) {
+                    result *= i;
+                }
+                currentInput = result.toString();
+            }
+            updateDisplay();
+        }
+        
+        function calculateSin() {
+            currentInput = Math.sin(parseFloat(currentInput)).toString();
+            updateDisplay();
+        }
+        
+        function calculateCos() {
+            currentInput = Math.cos(parseFloat(currentInput)).toString();
+            updateDisplay();
+        }
+        
+        function calculateTan() {
+            currentInput = Math.tan(parseFloat(currentInput)).toString();
+            updateDisplay();
+        }
+        
+        function calculateAsin() {
+            currentInput = Math.asin(parseFloat(currentInput)).toString();
+            updateDisplay();
+        }
+        
+        function calculateAcos() {
+            currentInput = Math.acos(parseFloat(currentInput)).toString();
+            updateDisplay();
+        }
+        
+        function calculateAtan() {
+            currentInput = Math.atan(parseFloat(currentInput)).toString();
+            updateDisplay();
+        }
+        
+        function calculateLog() {
+            currentInput = Math.log10(parseFloat(currentInput)).toString();
+            updateDisplay();
+        }
+        
+        function calculateLn() {
+            currentInput = Math.log(parseFloat(currentInput)).toString();
+            updateDisplay();
+        }
+        
+        function calculatePi() {
+            currentInput = Math.PI.toString();
+            updateDisplay();
+        }
+        
+        function calculateE() {
+            currentInput = Math.E.toString();
+            updateDisplay();
+        }
+        
+        function openParenthesis() {
+            if (resetInput || currentInput === '0') {
+                currentInput = '(';
+                resetInput = false;
+            } else {
+                currentInput += '(';
+            }
+            updateDisplay();
+        }
+        
+        function closeParenthesis() {
+            if (resetInput || currentInput === '0') {
+                currentInput = ')';
+                resetInput = false;
+            } else {
+                currentInput += ')';
+            }
+            updateDisplay();
+        }
+        
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            if (event.key >= '0' && event.key <= '9') {
+                appendNumber(event.key);
+            } else if (event.key === '.') {
+                appendNumber('.');
+            } else if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/' || event.key === '%' || event.key === '^') {
+                appendOperator(event.key);
+            } else if (event.key === 'Enter' || event.key === '=') {
+                calculate();
+            } else if (event.key === 'Escape') {
+                clearAll();
+            } else if (event.key === 'Backspace') {
+                deleteLastChar();
+            } else if (event.key === '(') {
+                openParenthesis();
+            } else if (event.key === ')') {
+                closeParenthesis();
+            }
+        });
+        
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Initialize display
+        updateDisplay();
+    </script>
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Scientific Calculator",
+      "url": "https://example.com/scientific-calculator",
+      "description": "Advanced scientific calculator with dark theme featuring trigonometry, logarithms, exponents, and more.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</body>
+</html>
